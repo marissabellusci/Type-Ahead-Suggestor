@@ -27,7 +27,7 @@ fetch(endpoint)
         return cities.filter(place => {
             //here we figure out if city/state matches what is searched//
             const regex = new RegExp(wordToMatch, 'gi') // the gi makes it global & insensitive (case insensitive) so it searches everything in our list (g) regardless of case (i)//
-            return place.city.match(regex);
+            return place.city.match(regex) || place.state.match(regex);
         })
     };
 

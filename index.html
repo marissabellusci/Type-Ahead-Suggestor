@@ -17,6 +17,20 @@
 <script>
 const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
 
+const cities = [];
+
+fetch(endpoint)
+    .then(blob => blob.json())
+    .then(data => cities.push(...data)); //using the spread method makes sure we push every single array object in separately into the previously empty array. Without using the spread, it nests the array inside the previous array so it is BOTH an object and an array (not what u want)//
+
+    function findMatches(wordToMatch, cities){
+        return cities.filter(place => {
+            //here we figure out if city/state matches what is searched//
+            const regex = new RegExp(wordToMatch, 'gi') // the gi makes it global & insensitive (case insensitive) so it searches everything in our list (g) regardless of case (i)//
+            return place.city.match(regex);
+        })
+    };
+
 </script>
 </body>
 </html>
